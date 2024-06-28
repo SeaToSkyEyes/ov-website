@@ -5,10 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const accessElement = document.getElementById('access-message');
     const thankYouElement = document.getElementById('thank-you-message');
     
-    function typeText(element, text, delay = 50) {
+    function typeText(element, text, delay) {
         let index = 0;
-        element.textContent = ""; // Ensure the element is empty before starting
-
         function type() {
             if (index < text.length) {
                 element.textContent += text.charAt(index);
