@@ -1,26 +1,45 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const accessMessage = "We cannot grant access to you at this time.";
-    const thankYouMessage = "We are immensely grateful for the incredible response Oversight Vanguard received during our preview phase. The passion and urgency of your voices have exceeded our expectations and reinforced the critical need for dedicated advocacy. As we gear up to expand our services in Fall 2024, we are strategically enhancing our capabilities to take on more requests and drive impactful changes. Thank you for your patience and trust as we prepare to open our doors wider to support even more individuals in their pursuit of justice and fairness in the workplace. Stay tuned for more updates as we approach our next phase of operations.";
-    
-    const accessElement = document.getElementById('access-message');
-    const thankYouElement = document.getElementById('thank-you-message');
-    
-    function typeText(element, text, delay) {
-        let index = 0;
-        function type() {
-            if (index < text.length) {
-                element.textContent += text.charAt(index);
-                index++;
-                setTimeout(type, delay);
-            } else if (element === thankYouElement) {
-                element.classList.add('futuristic-red');
-            }
-        }
-        type();
-    }
+const canvas = document.getElementById('specsCanvas');
+const ctx = canvas.getContext('2d');
+let specs = [];
 
-    typeText(accessElement, accessMessage, 100);
-    setTimeout(() => {
-        typeText(thankYouElement, thankYouMessage, 50);
-    }, accessMessage.length * 100);
-});
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+function createSpecs() {
+    for (let i = 0; i < 100; i++) {
+        specs.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 2,
+            alpha: Math.random() * 0.5 + 0.2,
+            direction: Math.random() * 2 * Math.PI,
+        });
+    }
+}
+
+function animateSpecs() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    specs.forEach(spec => {
+        spec.x += Math.cos(spec.direction) * 0.5;
+        spec.y += Math.sin(spec.direction) * 0.5;
+
+        if (spec.x < 0 || spec.x > canvas.width || spec.y < 0 || spec.y > canvas.height) {
+            spec.x = Math.random() * canvas.width;
+            spec.y = Math.random() * canvas.height;
+        }
+
+        ctx.beginPath();
+        ctx.arc(spec.x, spec.y, spec.radius, 0, 2 * Math.PI, false);
+        ctx.fillStyle = `rgba(255, 255, 255, ${spec.alpha})`;
+        ctx.fill();
+    });
+
+    requestAnimationFrame(animateSpecs);
+}
+
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+createSpecs();
+animateSpecs();
