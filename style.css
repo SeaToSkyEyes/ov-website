@@ -65,19 +65,36 @@ p {
     pointer-events: none;
 }
 
+/* Default Circle Size */
 .container::before {
     content: '';
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 250px; /* Reduce size for better mobile fit */
-    height: 250px;
+    width: 350px; /* Original size */
+    height: 350px;
     border-radius: 50%;
     background: transparent;
     border: 2px solid rgba(255, 255, 255, 0.5);
     animation: siriEdge 4s infinite ease-in-out;
     transform: translate(-50%, -50%);
     pointer-events: none;
+}
+
+/* Smaller Circle for Tablets */
+@media (max-width: 768px) {
+    .container::before {
+        width: 300px;
+        height: 300px;
+    }
+}
+
+/* Smaller Circle for Mobile Phones */
+@media (max-width: 480px) {
+    .container::before {
+        width: 250px;
+        height: 250px;
+    }
 }
 
 @keyframes siriEdge {
