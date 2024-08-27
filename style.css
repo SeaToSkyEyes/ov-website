@@ -3,14 +3,13 @@
 body, html {
     margin: 0;
     padding: 0;
-    min-height: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #add8e6;
     font-family: 'Poppins', sans-serif;
-    overflow-x: hidden; /* Prevent horizontal overflow */
-    overflow-y: auto;   /* Allow vertical scrolling */
+    overflow: hidden;
 }
 
 .container {
@@ -18,41 +17,19 @@ body, html {
     position: relative;
     z-index: 1;
     color: white;
-    padding: 20px; /* Add padding for smaller screens */
-    max-width: 100%; /* Ensure the container doesn't exceed screen width */
-    box-sizing: border-box; /* Include padding in the element's total width/height */
 }
 
 h1 {
-    font-size: 5rem; /* Smaller default size */
+    font-size: 7rem;
     margin: 0;
 }
 
 p {
     font-size: 1rem;
     margin-top: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 50px;
+    margin-right: 50px;
     color: rgba(30, 90, 90, 0.9); /* Muted Teal */
-}
-
-/* Make the text responsive */
-@media (max-width: 768px) {
-    h1 {
-        font-size: 3.5rem; /* Adjust for tablets */
-    }
-    p {
-        font-size: 0.9rem; /* Slightly smaller paragraph text */
-    }
-}
-
-@media (max-width: 480px) {
-    h1 {
-        font-size: 2.5rem; /* Adjust for mobile phones */
-    }
-    p {
-        font-size: 0.8rem; /* Smaller paragraph text for mobile */
-    }
 }
 
 #specsCanvas {
@@ -65,13 +42,12 @@ p {
     pointer-events: none;
 }
 
-/* Default Circle Size */
 .container::before {
     content: '';
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 350px; /* Original size */
+    width: 350px;
     height: 350px;
     border-radius: 50%;
     background: transparent;
@@ -79,22 +55,6 @@ p {
     animation: siriEdge 4s infinite ease-in-out;
     transform: translate(-50%, -50%);
     pointer-events: none;
-}
-
-/* Smaller Circle for Tablets */
-@media (max-width: 768px) {
-    .container::before {
-        width: 300px;
-        height: 300px;
-    }
-}
-
-/* Smaller Circle for Mobile Phones */
-@media (max-width: 480px) {
-    .container::before {
-        width: 250px;
-        height: 250px;
-    }
 }
 
 @keyframes siriEdge {
